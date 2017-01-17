@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<style>
+    .button {
+        width: 100px;
+        height: 100px;
+    }
+    
+    .buttonText {
+        font-size:20px;
+        font-family: Baskerville;
+    }
+</style>
+<body>
+
+<canvas id='myCanvas' 
+width='1000' height='700'
+style='border:1px solid #d3d3d3;'>
+Your browser does not support the HTML5 canvas tag.    
+</canvas>
+
+<table style='float:right'>
+    <tr>
+        <td>
+            <button type="button" class = "button" onclick=colorize()> <div class='buttonText'>Colorize</div></button> 
+        </td>
+</table>
+    
+<script>
+    /*var img = new Image();
+    img.src = "picSafe.png";
+    ctx.drawImage(img,0,0);
+    img.style.display = 'none';
+    */
+    
+    var c = document.getElementById("myCanvas");
+    var ctx = c.getContext("2d");
+    ctx.fillStyle = "black";
+    ctx.fillRect(0, 0, c.width, c.height);
+    
+    function colorize() {
+        var imageData = ctx.getImageData(0,0,c.width,c.height);
+        var newData = imageData.data;
+        
+        for (var i = 0; i < newData.length; i+=4) {
+            if (newData[i] + newData[i+1] + newData[i+2] == 0) {
+                newData[i] = ((i/newData.length)*255)+90;
+                newData[i+1] = ((i/newData.length)*255)+60;
+                newData[i+2] = ((i/newData.length)*255)+30;   
+            }
+        }
+        
+        ctx.putImageData(imageData,0,0);
+    }
+    
+    /*ctx.font = "40px Verdana";
+    ctx.fillText("Choose An Image!",20,50);*/
+</script>
+</body>
