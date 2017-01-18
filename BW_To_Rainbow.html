@@ -27,16 +27,28 @@ Your browser does not support the HTML5 canvas tag.
 </table>
     
 <script>
-    /*var img = new Image();
+    var img = new Image();
     img.src = "picSafe.png";
+    
+    Object.prototype.keys = function (obj){
+        var keys = [];
+        for (var key in obj) {
+            keys.push(key);
+        }
+        alert(1);
+        return keys;
+    }
+    
+    alert(img.src.keys());
+    
+    
+    //img.onload = function() {}
+
+    var c = document.getElementById("canvas");
+    var ctx = c.getContext("2d");
+    
     ctx.drawImage(img,0,0);
     img.style.display = 'none';
-    */
-    
-    var c = document.getElementById("myCanvas");
-    var ctx = c.getContext("2d");
-    ctx.fillStyle = "black";
-    ctx.fillRect(0, 0, c.width, c.height);
     
     function colorize() {
         var imageData = ctx.getImageData(0,0,c.width,c.height);
